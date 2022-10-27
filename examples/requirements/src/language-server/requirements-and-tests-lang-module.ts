@@ -5,12 +5,13 @@
  ******************************************************************************/
 
 import {
-    createDefaultModule, createDefaultSharedModule, DefaultSharedModuleContext, inject,
+    createDefaultModule, createDefaultSharedModule, DefaultSharedModuleContext,
     LangiumSharedServices
 } from 'langium';
 import { RequirementsAndTestsGeneratedSharedModule, RequirementsGeneratedModule, TestsGeneratedModule } from './generated/module';
 import { RequirementsLangModule, RequirementsLangServices } from './requirements-lang-module';
 import { TestsLangModule, TestsLangServices } from './tests-lang-module';
+import { inject } from 'djinject';
 
 /**
  * Create the full set of services required by Langium.
@@ -35,17 +36,17 @@ export function createRequirementsAndTestsLangServices(context: DefaultSharedMod
     const shared = inject(
         createDefaultSharedModule(context),
         RequirementsAndTestsGeneratedSharedModule
-    );
+    ) as LangiumSharedServices;
     const RequirementsLang = inject(
         createDefaultModule({ shared }),
         RequirementsGeneratedModule,
         RequirementsLangModule
-    );
+    ) as RequirementsLangServices;
     const TestsLang = inject(
         createDefaultModule({ shared }),
         TestsGeneratedModule,
         TestsLangModule
-    );
+    ) as TestsLangServices;
     shared.ServiceRegistry.register(RequirementsLang);
     shared.ServiceRegistry.register(TestsLang);
     return { shared, RequirementsLang: RequirementsLang, TestsLang: TestsLang };

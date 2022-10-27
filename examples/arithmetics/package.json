@@ -59,6 +59,7 @@
     },
     "dependencies": {
         "chalk": "^4.1.2",
+        "djinject": "^0.1.0",
         "commander": "^8.0.0",
         "langium": "0.5.0",
         "vscode-languageclient": "^8.0.2",

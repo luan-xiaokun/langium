@@ -4,9 +4,10 @@
  * terms of the MIT License, which is available in the project root.
  ******************************************************************************/
 
+import { inject, Module } from 'djinject';
 import {
-    createDefaultModule, createDefaultSharedModule, DefaultSharedModuleContext, inject,
-    LangiumServices, LangiumSharedServices, Module, PartialLangiumServices
+    createDefaultModule, createDefaultSharedModule, DefaultSharedModuleContext,
+    LangiumServices, LangiumSharedServices, PartialLangiumServices
 } from 'langium';
 import { StatemachineGeneratedModule, StatemachineGeneratedSharedModule } from './generated/module';
 import { StatemachineValidationRegistry, StatemachineValidator } from './statemachine-validator';
@@ -60,12 +61,12 @@ export function createStatemachineServices(context: DefaultSharedModuleContext):
     const shared = inject(
         createDefaultSharedModule(context),
         StatemachineGeneratedSharedModule
-    );
+    ) as LangiumSharedServices;
     const statemachine = inject(
         createDefaultModule({ shared }),
         StatemachineGeneratedModule,
         StatemachineModule
-    );
+    ) as StatemachineServices;
     shared.ServiceRegistry.register(statemachine);
     return { shared, statemachine };
 }

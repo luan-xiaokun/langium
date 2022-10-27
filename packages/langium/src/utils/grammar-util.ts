@@ -5,7 +5,7 @@
  ******************************************************************************/
 
 import { createDefaultModule, createDefaultSharedModule } from '../default-module';
-import { inject, Module } from '../dependency-injection';
+import { inject, Module } from 'djinject';
 import { interpretAstReflection } from '../grammar/ast-reflection-interpreter';
 import * as ast from '../grammar/generated/ast';
 import { prepareGrammar, terminalRegex } from '../grammar/internal-grammar-util';
@@ -311,8 +311,8 @@ export function createServicesForGrammar(config: {
             ParserConfig: () => parserConfig
         }
     };
-    const shared = inject(createDefaultSharedModule(EmptyFileSystem), generatedSharedModule, config.sharedModule);
-    const services = inject(createDefaultModule({ shared }), generatedModule, config.module);
+    const shared = inject(createDefaultSharedModule(EmptyFileSystem), generatedSharedModule, config.sharedModule) as LangiumSharedServices;
+    const services = inject(createDefaultModule({ shared }), generatedModule, config.module) as LangiumServices;
     shared.ServiceRegistry.register(services);
     return services;
 }

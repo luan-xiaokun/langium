@@ -5,7 +5,7 @@
  ******************************************************************************/
 
 import { createDefaultModule, createDefaultSharedModule, DefaultSharedModuleContext } from '../default-module';
-import { inject, Module } from '../dependency-injection';
+import { inject, Module } from 'djinject';
 import { LangiumServices, LangiumSharedServices, PartialLangiumServices, PartialLangiumSharedServices } from '../services';
 import { LangiumGrammarGeneratedModule, LangiumGrammarGeneratedSharedModule } from './generated/module';
 import { LangiumGrammarScopeComputation, LangiumGrammarScopeProvider } from './references/grammar-scope';
@@ -57,12 +57,12 @@ export function createLangiumGrammarServices(context: DefaultSharedModuleContext
         createDefaultSharedModule(context),
         LangiumGrammarGeneratedSharedModule,
         sharedModule
-    );
+    ) as LangiumSharedServices;
     const grammar = inject(
         createDefaultModule({ shared }),
         LangiumGrammarGeneratedModule,
         LangiumGrammarModule
-    );
+    ) as LangiumGrammarServices;
     shared.ServiceRegistry.register(grammar);
     return { shared, grammar };
 }

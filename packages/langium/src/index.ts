@@ -5,7 +5,6 @@
  ******************************************************************************/
 
 export * from './default-module';
-export * from './dependency-injection';
 export * from './generator/generator-node';
 export * from './generator/node-processor';
 export * from './generator/template-string';

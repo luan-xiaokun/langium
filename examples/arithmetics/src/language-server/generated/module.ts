@@ -3,9 +3,10 @@
  * DO NOT EDIT MANUALLY!
  ******************************************************************************/
 
-import { LangiumGeneratedServices, LangiumGeneratedSharedServices, LangiumSharedServices, LangiumServices, LanguageMetaData, Module } from 'langium';
+import { LangiumGeneratedServices, LangiumGeneratedSharedServices, LangiumSharedServices, LangiumServices, LanguageMetaData } from 'langium';
 import { ArithmeticsAstReflection } from './ast';
 import { ArithmeticsGrammar } from './grammar';
+import { Module } from 'djinject';
 
 export const ArithmeticsLanguageMetaData: LanguageMetaData = {
     languageId: 'arithmetics',

@@ -14,7 +14,7 @@ describe('Types generator', () => {
 
     test('should generate types file', async () => {
         const result = (await parseHelper<Grammar>(grammar)(TEST_GRAMMAR)).parseResult;
-        const typesFileContent = generateTypesFile(grammar, [result.value]);
+        const typesFileContent = generateTypesFile(grammar, [result.value]).replace(/\r/g, '');
         expect(typesFileContent).toMatch(EXPECTED_TYPES);
     });
 
